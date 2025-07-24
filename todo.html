@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do list</title>
+    <style>
+        body {
+            font-family: Calibri;
+        }
+
+        .container {
+            max-width: 800px;
+            align-items: center;
+            background-color: #cbffef;
+            margin-left:auto;
+            margin-right:auto;            
+        }
+
+        .table .th{
+            background-color: #fcc7ae;
+            border: 1px solid black;
+        }
+
+        .input-form {
+            display: flex;
+            margin-bottom: 10px;
+        }
+
+        .input-query {
+            margin-right: 10px;
+            flex-direction:column;
+        }
+
+        .input-button {
+            height: 100%;
+            margin-right: 10px;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="text-align: center">To-do list</h1>
+        <div class="input-form">
+            <div>
+                <div class="input-query"> What's your tasks
+                    <input class="input-slot" name="task" type="text">
+                </div>                
+            </div>
+            <div>
+                <div class="input-query">Due date
+                <input class="input-slot" name="duedate" type="date">
+                </div>
+            </div>
+            <div>
+                <div class="input-query">Priority
+                <select class="input-slot" name="priority">
+                    <option vlaue="high">High</option>
+                    <option vlaue="moderate">Moderate</option>
+                    <option vlaue="low">Low</option>
+                </select>
+                </div>
+            </div>
+            <button class="input-button" onclick="submitData()">Submit</button>
+            <button class="input-button">Export</button>             
+        </div>
+
+
+        <div>
+            <table class="table" style="width: 100%">
+                <thead>
+                    <tr>
+                        <th class="th" value="th1" name="t-task">Tasks</th>
+                        <th class="th" name="t-duedate">Due date</th>
+                        <th class="th" name="t-priority">Priority</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>data1</td>
+                        <td>data2</td>
+                        <td>data3</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="todo.js"></script>
+</body>
+</html>
