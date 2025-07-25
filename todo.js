@@ -1,3 +1,25 @@
+function writeHTML(data) {
+    
+    const tableDOM = document.querySelector("table tbody")
+
+    let htmlTable = ''
+        for (let i=0; i < data.length; i++) {
+            htmlTable += `<tr>
+            <td>${data[i].submittedtime}</td>
+            <td>${data[i].tasks}</td>
+            <td>${data[i].duedate}</td>
+            <td>${data[i].priority}</td>
+            </tr>`
+        }
+        
+        tableDOM.innerHTML = htmlTable
+}
+
+window.onload = async() => {
+    let data = JSON.parse(localStorage.getItem("userData"))
+    await writeHTML(data)
+}
+
 const submitData = () => {
 
     // access to each element of the input form
@@ -5,6 +27,13 @@ const submitData = () => {
     let tasksDOM = document.querySelector('input[name=task]')
     let dateDOM = document.querySelector('input[name=duedate]')
     let priorityDOM = document.querySelector('select[name=priority]')
+
+    // handle the priority order for sorting
+    const priorityOrder = {
+        high: 3,
+        moderate: 2,
+        low: 1
+    }
 
     // store the new data record
     let userInput = {
@@ -31,33 +60,48 @@ const submitData = () => {
         // store the called array back to the localStorage
         localStorage.setItem("userData", JSON.stringify(storage, null, 2))
 
-        // show data on the table
-        const tableDOM = document.querySelector("table tbody")
-        let local_storage = JSON.parse(localStorage.getItem("userData"))
+        // recall the updated data to sort
+        let data = JSON.parse(localStorage.getItem("userData"))
 
-        let htmlTable = ''
-        for (let i=0; i < local_storage.length; i++) {
-            htmlTable += `<tr>
-            <td>${local_storage[i].submittedtime}</td>
-            <td>${local_storage[i].tasks}</td>
-            <td>${local_storage[i].duedate}</td>
-            <td>${local_storage[i].priority}</td>
-            </tr>`
-        }
-        
-        tableDOM.innerHTML = htmlTable
+        // sort the data
+        data.sort((a,b) => {
+            const dateA = new Date(a.duedate)
+            const dateB = new Date(b.duedate)
+
+            if (dateA < dateB) return -1
+            if (dateA > dateB) return 1
+
+            // sort the priority
+            return priorityOrder[b.priority] - priorityOrder[a.priority]
+        })
+
+
+        // show data on the table
+
+        // const tableDOM = document.querySelector("table tbody")
+        // let htmlTable = ''
+        // for (let i=0; i < data.length; i++) {
+        //     htmlTable += `<tr>
+        //     <td>${data[i].submittedtime}</td>
+        //     <td>${data[i].tasks}</td>
+        //     <td>${data[i].duedate}</td>
+        //     <td>${data[i].priority}</td>
+        //     </tr>`
+        // }        
+        // tableDOM.innerHTML = htmlTable
+
+        writeHTML(data)
 
 
     } catch (error) {
         console.error(error)
-    }
-    
+    }   
 
 }
 
 const exportData = () => {
-    let storage = localStorage.getItem("userData")
-    const blob = new Blob([storage], {type : "application/json"})
+    let data = localStorage.getItem("userData")
+    const blob = new Blob([data], {type : "application/json"})
     const url = URL.createObjectURL(blob)
 
     const a = document.createElement('a')
