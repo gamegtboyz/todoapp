@@ -3,7 +3,7 @@ In the world rapidly advanced in AI, this might be one of the very first applica
 
 ## How to use it
 ### Download and open an app
-For the complete beginners on Github, you could download this app from 'Code' button, then choose 'Download ZIP' then .zip file will be downloaded into your machine.
+For the complete beginners on Github, you could download this app from 'Code' button, then choose 'Download ZIP'.
 
 After you download the file, you could move the zip file anywhere, but .html and .js file must be in the same directory.
 
