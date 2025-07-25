@@ -6,13 +6,14 @@
     <title>To-Do list</title>
     <style>
         body {
-            font-family: Calibri;
+            font-family: monospace;
+            background-color: #272727;
         }
 
         .container {
             max-width: 800px;
             align-items: center;
-            background-color: #d8d8d8;
+            background-color: #9e9e9e;
             margin-left:auto;
             margin-right:auto;            
         }
@@ -45,7 +46,7 @@
         <h1 style="text-align: center">To-do list</h1>
         <div class="input-form">
             <div>
-                <div class="input-query"> What's your tasks
+                <div class="input-query" style="margin-left: 10px;"> What's your tasks
                     <input class="input-slot" name="task" type="text">
                 </div>                
             </div>
@@ -64,19 +65,20 @@
                 </div>
             </div>
             <button class="input-button" onclick="submitData()">Submit</button>
-            <button class="input-button" onclick="exportData()">Export</button>
-            <button class="input-button" onclick="clearData()">Clear</button>
+            <button class="input-button" onclick="removeCompletedTasks()">Clear</button>
         </div>
 
 
         <div>
+            <h3 style="padding-left: 10px; margin-bottom: 0px;">Pending Tasks</h2>
             <table class="table" style="width: 100%">
                 <thead>
                     <tr>
-                        <th class="th" name="t-time">Submitted Time</th>
-                        <th class="th" name="t-task">Tasks</th>
+                        <th class="th" name="t-time">Timestamp</th>
+                        <th class="th" name="t-task">Task Description</th>
                         <th class="th" name="t-duedate">Due date</th>
                         <th class="th" name="t-priority">Priority</th>
+                        <th class="th" name="t-done">Done?</th>
                     </tr>
                 </thead>
                 <tbody>
