@@ -84,7 +84,10 @@ const submitData = () => {
         sortData(data)
 
         // show data on the table
-        writeHTML(data)        
+        writeHTML(data)
+        
+        // refresh the page
+        location.reload()
 
     } catch (error) {
         console.error(error)
