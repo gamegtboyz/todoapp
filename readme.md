@@ -1,8 +1,10 @@
 # Ngo-Ngo: Your silliest to-do list application
-In the world rapidly advanced in AI, this might be one of the very first project from your silly neighbor.
+In the world rapidly advanced in AI, this might be one of the very first application from your silly neighbor.
 
 ## How to use it
-### Open an app
+### Download and open an app
+For the complete beginners on Github, you could download this app from 'Code' button, then choose 'Download ZIP' then .zip file will be downloaded into your machine.
+
 After you download the file, you could move the zip file anywhere, but .html and .js file must be in the same directory.
 
 Then you could access the app by opening .html file right from your browser. That's it.
