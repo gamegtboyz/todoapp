@@ -30,6 +30,24 @@ const submitData = () => {
 
         // store the called array back to the localStorage
         localStorage.setItem("userData", JSON.stringify(storage, null, 2))
+
+        // show data on the table
+        const tableDOM = document.querySelector("table tbody")
+        let local_storage = JSON.parse(localStorage.getItem("userData"))
+
+        let htmlTable = ''
+        for (let i=0; i < local_storage.length; i++) {
+            htmlTable += `<tr>
+            <td>${local_storage[i].submittedtime}</td>
+            <td>${local_storage[i].tasks}</td>
+            <td>${local_storage[i].duedate}</td>
+            <td>${local_storage[i].priority}</td>
+            </tr>`
+        }
+        
+        tableDOM.innerHTML = htmlTable
+
+
     } catch (error) {
         console.error(error)
     }
@@ -38,8 +56,8 @@ const submitData = () => {
 }
 
 const exportData = () => {
-    const jsonStr = JSON.stringify(tasks, null, 2)
-    const blob = new Blob([jsonStr], {type : "application/json"})
+    let storage = localStorage.getItem("userData")
+    const blob = new Blob([storage], {type : "application/json"})
     const url = URL.createObjectURL(blob)
 
     const a = document.createElement('a')
@@ -56,10 +74,26 @@ const storageCall = () => {
 }
 
 const showData = () => {
+    const tableDOM = document.querySelector("table tbody")
+    let storage = JSON.parse(localStorage.getItem("userData"))
+
+    let htmlTable = ''
+    for (let i=0; i < storage.length; i++) {
+        htmlTable += `<tr>
+        <td>${storage[i].submittedtime}</td>
+        <td>${storage[i].tasks}</td>
+        <td>${storage[i].duedate}</td>
+        <td>${storage[i].priority}</td>
+        </tr>`
+    }
     
+    tableDOM.innerHTML = htmlTable
 }
 
 // wipe out the storage value
 const clearData = () => {
     localStorage.setItem("userData", null)
+
+    const tableDOM = document.querySelector("table tbody")
+    tableDOM.innerHTML = ''
 }
