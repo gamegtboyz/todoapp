@@ -94,6 +94,24 @@ const submitData = () => {
     }   
 }
 
+const removeCompletedTasks = () => {
+
+    let data = JSON.parse((localStorage.getItem("userData")))
+    
+    // Get all checkboxes with name 'complete'
+    const checkboxes = document.querySelectorAll('input[name="complete"]:checked')
+    const checkedTimestamps = Array.from(checkboxes).map(cb => cb.value)
+    checkboxes.forEach(cb => cb.closest('tr').remove())
+    data = data.filter(datum => !checkedTimestamps.includes(datum.timestamp))
+    
+    sortData(data)
+    writeHTML(data)
+    
+    // save the updated array back to the localStorage
+    localStorage.setItem("userData", JSON.stringify(data, null, 2))
+
+}
+
 const exportData = () => {
     let data = localStorage.getItem("userData")
     const blob = new Blob([data], {type : "application/json"})
@@ -160,21 +178,4 @@ const clearAllData = () => {
 
     const tableDOM = document.querySelector("table tbody")
     tableDOM.innerHTML = ''
-}
-
-const removeCompletedTasks = () => {
-
-    let data = JSON.parse((localStorage.getItem("userData")))
-    
-    // Get all checkboxes with name 'complete'
-    const checkboxes = document.querySelectorAll('input[name="complete"]:checked')
-    const checkedTimestamps = Array.from(checkboxes).map(cb => cb.value)
-    checkboxes.forEach(cb => cb.closest('tr').remove())
-    data = data.filter(datum => !checkedTimestamps.includes(datum.timestamp))
-    
-    sortData(data)
-    writeHTML(data)
-    
-    // save the updated array back to the localStorage
-    localStorage.setItem("userData", JSON.stringify(data, null, 2))
 }
